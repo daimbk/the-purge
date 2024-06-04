@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://c0rsg63yycimj" path="res://assets/enemies/Bringer-of-Death-SpritSheet.png" id="1_wofkm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dx6ne"]
-radius = 15.0
-height = 54.0
+radius = 12.0
+height = 42.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dtsml"]
 atlas = ExtResource("1_wofkm")
@@ -193,15 +193,19 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="golem" type="CharacterBody2D"]
+[node name="ScytheKiller" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_w02yg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(37, 20)
+position = Vector2(35, 19)
 shape = SubResource("CapsuleShape2D_dx6ne")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(13.75, 4.125)
+scale = Vector2(0.582143, 0.755376)
 sprite_frames = SubResource("SpriteFrames_uguxe")
 animation = &"idle"
 frame = 7
 frame_progress = 0.51282
+metadata/_edit_lock_ = true

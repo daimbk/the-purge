@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://nc3lip23g2rv" path="res://assets/map/grass.png" id="1_byxm3"]
 [ext_resource type="PackedScene" uid="uid://nadoyp047mua" path="res://scenes/player.tscn" id="1_k3bdg"]
-[ext_resource type="PackedScene" uid="uid://cmsw0m6iwq22f" path="res://scenes/golem.tscn" id="3_dslx6"]
+[ext_resource type="PackedScene" uid="uid://cmsw0m6iwq22f" path="res://scenes/scythekiller.tscn" id="3_dslx6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ff4sy"]
 texture = ExtResource("1_byxm3")
@@ -368,8 +368,8 @@ position = Vector2(577, 325)
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="golem" parent="Enemies" instance=ExtResource("3_dslx6")]
-position = Vector2(327, 424)
+[node name="ScytheKiller" parent="Enemies" instance=ExtResource("3_dslx6")]
+position = Vector2(866, 155)
 
-[node name="golem2" parent="Enemies" instance=ExtResource("3_dslx6")]
-position = Vector2(785, 197)
+[node name="ScytheKiller2" parent="Enemies" instance=ExtResource("3_dslx6")]
+position = Vector2(279, 442)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://nadoyp047mua"]
+[gd_scene load_steps=24 format=3 uid="uid://nadoyp047mua"]
 
 [ext_resource type="Script" path="res://scripts/Player.cs" id="1_r33hq"]
 [ext_resource type="Texture2D" uid="uid://ciia4luln4rl4" path="res://assets/player-sheet.png" id="2_560ts"]
@@ -38,6 +38,18 @@ region = Rect2(192, 224, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_3oymv"]
 atlas = ExtResource("2_560ts")
 region = Rect2(224, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5bla"]
+atlas = ExtResource("2_560ts")
+region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k7xg3"]
+atlas = ExtResource("2_560ts")
+region = Rect2(32, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ue1rd"]
+atlas = ExtResource("2_560ts")
+region = Rect2(64, 192, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dfuqg"]
 atlas = ExtResource("2_560ts")
@@ -104,6 +116,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_r5bla")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k7xg3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ue1rd")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_dfuqg")
 }, {
 "duration": 1.0,
@@ -150,6 +176,6 @@ position_smoothing_enabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gblut")
-animation = &"walk"
-frame = 3
-frame_progress = 0.7349
+animation = &"death"
+frame = 1
+frame_progress = 0.517292
