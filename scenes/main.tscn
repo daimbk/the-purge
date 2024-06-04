@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://frnp3dxrpl4k"]
+[gd_scene load_steps=6 format=3 uid="uid://frnp3dxrpl4k"]
 
 [ext_resource type="Texture2D" uid="uid://nc3lip23g2rv" path="res://assets/map/grass.png" id="1_byxm3"]
 [ext_resource type="PackedScene" uid="uid://nadoyp047mua" path="res://scenes/player.tscn" id="1_k3bdg"]
+[ext_resource type="PackedScene" uid="uid://cmsw0m6iwq22f" path="res://scenes/golem.tscn" id="3_dslx6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ff4sy"]
 texture = ExtResource("1_byxm3")
@@ -364,3 +365,11 @@ layer_0/tile_data = PackedInt32Array(0, 327680, 6, 65536, 327680, 6, 131072, 327
 
 [node name="Player" parent="." instance=ExtResource("1_k3bdg")]
 position = Vector2(577, 325)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="golem" parent="Enemies" instance=ExtResource("3_dslx6")]
+position = Vector2(327, 424)
+
+[node name="golem2" parent="Enemies" instance=ExtResource("3_dslx6")]
+position = Vector2(785, 197)

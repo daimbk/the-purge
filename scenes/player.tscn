@@ -3,6 +3,10 @@
 [ext_resource type="Script" path="res://scripts/Player.cs" id="1_r33hq"]
 [ext_resource type="Texture2D" uid="uid://ciia4luln4rl4" path="res://assets/player-sheet.png" id="2_560ts"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_une8k"]
+radius = 6.0
+height = 24.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_pb8mv"]
 atlas = ExtResource("2_560ts")
 region = Rect2(0, 224, 32, 32)
@@ -133,26 +137,19 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_une8k"]
-radius = 6.0
-height = 24.0
-
-[node name="Player" type="Node2D"]
-
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-collision_mask = 2
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_r33hq")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 1)
+shape = SubResource("CapsuleShape2D_une8k")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gblut")
 animation = &"walk"
 frame = 3
 frame_progress = 0.7349
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(-1, 1)
-shape = SubResource("CapsuleShape2D_une8k")
-
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
-zoom = Vector2(2, 2)
-position_smoothing_enabled = true
