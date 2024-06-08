@@ -3,10 +3,8 @@ using System;
 
 public partial class Enemy : CharacterBody2D
 {
-	[Export]
-	public int Speed = 100;
-	[Export]
-	public float AttackRange = 15.0f;
+	[Export] public int Speed = 100;
+	[Export] public float AttackRange = 15.0f;
 	
 	private Node2D player;
 	private AnimatedSprite2D animation;

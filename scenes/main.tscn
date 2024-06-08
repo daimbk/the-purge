@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://frnp3dxrpl4k"]
+[gd_scene load_steps=8 format=3 uid="uid://frnp3dxrpl4k"]
 
 [ext_resource type="Texture2D" uid="uid://nc3lip23g2rv" path="res://assets/map/grass.png" id="1_byxm3"]
 [ext_resource type="PackedScene" uid="uid://nadoyp047mua" path="res://scenes/player.tscn" id="1_k3bdg"]
+[ext_resource type="Script" path="res://scripts/EnemySpawner.cs" id="3_a7bth"]
 [ext_resource type="PackedScene" uid="uid://cmsw0m6iwq22f" path="res://scenes/scythekiller.tscn" id="3_dslx6"]
+[ext_resource type="PackedScene" uid="uid://2b7xfatsy6h7" path="res://scenes/shuriken.tscn" id="3_tk2h7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ff4sy"]
 texture = ExtResource("1_byxm3")
@@ -366,10 +368,9 @@ layer_0/tile_data = PackedInt32Array(0, 327680, 6, 65536, 327680, 6, 131072, 327
 [node name="Player" parent="." instance=ExtResource("1_k3bdg")]
 position = Vector2(577, 325)
 
+[node name="Shuriken" parent="Player" instance=ExtResource("3_tk2h7")]
+position = Vector2(-1, 0)
+
 [node name="Enemies" type="Node2D" parent="."]
-
-[node name="ScytheKiller" parent="Enemies" instance=ExtResource("3_dslx6")]
-position = Vector2(866, 155)
-
-[node name="ScytheKiller2" parent="Enemies" instance=ExtResource("3_dslx6")]
-position = Vector2(279, 442)
+script = ExtResource("3_a7bth")
+EnemyScene = ExtResource("3_dslx6")
