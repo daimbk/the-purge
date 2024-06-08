@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://2b7xfatsy6h7"]
+
+[ext_resource type="Script" path="res://scripts/Shuriken.cs" id="1_geunq"]
+[ext_resource type="Texture2D" uid="uid://cis2prwfj68mt" path="res://assets/weapons/shuriken.png" id="2_qlcsm"]
+[ext_resource type="PackedScene" uid="uid://qelcywsr23vs" path="res://scenes/HitDetection.tscn" id="3_wyk0e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g8lpv"]
+radius = 16.0
+
+[node name="Shuriken" type="Node2D"]
+script = ExtResource("1_geunq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2.38419e-07, -2.38419e-07)
+scale = Vector2(0.0229391, 0.0222222)
+texture = ExtResource("2_qlcsm")
+
+[node name="HitDetection" parent="." instance=ExtResource("3_wyk0e")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitDetection"]
+shape = SubResource("CircleShape2D_g8lpv")
