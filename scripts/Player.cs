@@ -11,6 +11,7 @@ public partial class Player : CharacterBody2D
 	{
 		// get the AnimatedSprite2D node
 		animation = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		animation.Connect("animation_finished", new Callable(this, nameof(OnAnimationFinished)));
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -57,7 +58,11 @@ public partial class Player : CharacterBody2D
 	{
 		gotHit = true;
 		animation.Play("death");
-		// end game
-		GD.Print("Game Over");
+	}
+	
+	private void OnAnimationFinished()
+	{
+		// TODO: replace with GAME OVER screen
+		GetTree().Quit();
 	}
 }

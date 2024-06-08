@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cmsw0m6iwq22f"]
+[gd_scene load_steps=37 format=3 uid="uid://cmsw0m6iwq22f"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.cs" id="1_w02yg"]
 [ext_resource type="Texture2D" uid="uid://c0rsg63yycimj" path="res://assets/enemies/Bringer-of-Death-SpritSheet.png" id="1_wofkm"]
@@ -38,6 +38,38 @@ region = Rect2(840, 186, 140, 93)
 [sub_resource type="AtlasTexture" id="AtlasTexture_juuc4"]
 atlas = ExtResource("1_wofkm")
 region = Rect2(980, 186, 140, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4uke"]
+atlas = ExtResource("1_wofkm")
+region = Rect2(140, 0, 140, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qx6al"]
+atlas = ExtResource("1_wofkm")
+region = Rect2(0, 372, 140, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78mvx"]
+atlas = ExtResource("1_wofkm")
+region = Rect2(140, 372, 140, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31det"]
+atlas = ExtResource("1_wofkm")
+region = Rect2(280, 372, 140, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qxnf2"]
+atlas = ExtResource("1_wofkm")
+region = Rect2(420, 372, 140, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pg0ce"]
+atlas = ExtResource("1_wofkm")
+region = Rect2(560, 372, 140, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vv6ev"]
+atlas = ExtResource("1_wofkm")
+region = Rect2(700, 372, 140, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgdcv"]
+atlas = ExtResource("1_wofkm")
+region = Rect2(840, 372, 140, 93)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kiet0"]
 atlas = ExtResource("1_wofkm")
@@ -136,6 +168,35 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_d4uke")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qx6al")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_78mvx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31det")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qxnf2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pg0ce")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vv6ev")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jgdcv")
+}],
+"loop": false,
+"name": &"death",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_kiet0")
 }, {
 "duration": 1.0,
@@ -205,7 +266,7 @@ shape = SubResource("CapsuleShape2D_dx6ne")
 position = Vector2(13.75, 4.125)
 scale = Vector2(0.582143, 0.755376)
 sprite_frames = SubResource("SpriteFrames_uguxe")
-animation = &"idle"
+animation = &"death"
 frame = 7
-frame_progress = 0.51282
+frame_progress = 1.0
 metadata/_edit_lock_ = true

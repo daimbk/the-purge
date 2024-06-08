@@ -9,22 +9,30 @@ public partial class Enemy : CharacterBody2D
 	private Node2D player;
 	private AnimatedSprite2D animation;
 	private bool isAttacking = false;
+	private bool isDying = false;
 
 	public override void _Ready()
 	{
 		player = GetNode<Node2D>("/root/Main/Player");
 		animation = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		animation.Connect("animation_finished", new Callable(this, nameof(OnAnimationFinished)));
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		// Calculate the direction to the player
+		if (isDying)
+		{
+			// don't perform any actions if the enemy is dying
+			return;
+		}
+		
+		// calculate the direction to the player
 		Vector2 direction = (player.GlobalPosition - GlobalPosition).Normalized();
 		float distanceToPlayer = GlobalPosition.DistanceTo(player.GlobalPosition);
 		
 		if (distanceToPlayer <= AttackRange)
 		{
-			// Stop moving and attack the player
+			// stop moving and attack the player
 			Velocity = Vector2.Zero;
 			if (!isAttacking)
 			{
@@ -33,7 +41,7 @@ public partial class Enemy : CharacterBody2D
 		}
 		else
 		{
-			// Move towards the player
+			// move towards the player
 			Vector2 velocity = direction * Speed;
 			Velocity = velocity;
 			animation.Play("walk");
@@ -48,5 +56,16 @@ public partial class Enemy : CharacterBody2D
 		isAttacking = true;
 		animation.Play("attack");
 		((Player)player).GetHit();
+	}
+	
+	public void Die()
+	{
+		isDying = true;
+		animation.Play("death");
+	}
+
+	private void OnAnimationFinished()
+	{
+		QueueFree();
 	}
 }

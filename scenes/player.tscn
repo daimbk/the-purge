@@ -110,9 +110,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3oymv")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -177,5 +177,5 @@ position_smoothing_enabled = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gblut")
 animation = &"death"
-frame = 1
-frame_progress = 0.517292
+frame = 7
+frame_progress = 1.0
