@@ -1,0 +1,86 @@
+[gd_scene load_steps=5 format=3 uid="uid://btono3oq5n3p6"]
+
+[ext_resource type="Script" path="res://scripts/MainMenu.cs" id="1_buk3x"]
+[ext_resource type="FontFile" uid="uid://c38vfly7t5xqh" path="res://assets/fonts/PixelOperator8.ttf" id="2_p4suj"]
+[ext_resource type="FontFile" uid="uid://wkpp6fdbuk3o" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="3_t1atr"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_3myx5"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_buk3x")
+
+[node name="Menu" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="Menu"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+texture = SubResource("CanvasTexture_3myx5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Play" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_p4suj")
+theme_override_font_sizes/font_size = 22
+text = "LET THE MASSACRE COMMENCE"
+
+[node name="Quit" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_p4suj")
+theme_override_font_sizes/font_size = 22
+text = "I'M AFRAID OF POWER"
+
+[node name="GameName" type="Label" parent="."]
+modulate = Color(6.35326e-06, 0.57228, 0.832386, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -127.0
+offset_top = 116.0
+offset_right = 127.0
+offset_bottom = 152.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_t1atr")
+theme_override_font_sizes/font_size = 35
+text = "PURGE SURVIVORS"
+
+[node name="SurvivalText" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_top = 184.0
+offset_right = 126.0
+offset_bottom = 220.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_t1atr")
+theme_override_font_sizes/font_size = 35
+text = "SURVIVE TO GROW STRONGER"
+
+[connection signal="pressed" from="Menu/VBoxContainer/Play" to="." method="_on_play_again_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

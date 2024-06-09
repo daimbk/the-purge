@@ -54,8 +54,8 @@ public partial class Enemy : CharacterBody2D
 	private void AttackPlayer()
 	{
 		isAttacking = true;
-		animation.Play("attack");
 		((Player)player).GetHit();
+		animation.Play("attack");
 	}
 	
 	public void Die()
