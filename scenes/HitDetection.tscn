@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://qelcywsr23vs"]
+[gd_scene load_steps=3 format=3 uid="uid://qelcywsr23vs"]
 
 [ext_resource type="Script" path="res://scripts/HitDetection.cs" id="1_pujo6"]
+[ext_resource type="AudioStream" uid="uid://1rdpm60b3t6w" path="res://assets/sounds/metal-whoosh.mp3" id="2_tm13o"]
 
 [node name="HitDetection" type="Area2D"]
 script = ExtResource("1_pujo6")
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Hit" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("2_tm13o")

@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://btono3oq5n3p6"]
+[gd_scene load_steps=7 format=3 uid="uid://btono3oq5n3p6"]
 
 [ext_resource type="Script" path="res://scripts/MainMenu.cs" id="1_buk3x"]
 [ext_resource type="FontFile" uid="uid://c38vfly7t5xqh" path="res://assets/fonts/PixelOperator8.ttf" id="2_p4suj"]
 [ext_resource type="FontFile" uid="uid://wkpp6fdbuk3o" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="3_t1atr"]
+[ext_resource type="AudioStream" uid="uid://djutqsppy33aa" path="res://assets/sounds/button-press.mp3" id="4_bd0so"]
+[ext_resource type="AudioStream" uid="uid://dxcjlkjgxxpto" path="res://assets/sounds/button-switch.mp3" id="5_ok4pj"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_3myx5"]
 
@@ -82,5 +84,10 @@ theme_override_fonts/font = ExtResource("3_t1atr")
 theme_override_font_sizes/font_size = 35
 text = "SURVIVE TO GROW STRONGER"
 
-[connection signal="pressed" from="Menu/VBoxContainer/Play" to="." method="_on_play_again_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[node name="Sounds" type="Node" parent="."]
+
+[node name="ButtonPress" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("4_bd0so")
+
+[node name="ButtonSwitch" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("5_ok4pj")

@@ -8,6 +8,7 @@ public partial class Enemy : CharacterBody2D
 	
 	private Node2D player;
 	private AnimatedSprite2D animation;
+	private AudioStreamPlayer soundPlayer;
 	private bool isAttacking = false;
 	private bool isDying = false;
 
@@ -29,6 +30,16 @@ public partial class Enemy : CharacterBody2D
 		// calculate the direction to the player
 		Vector2 direction = (player.GlobalPosition - GlobalPosition).Normalized();
 		float distanceToPlayer = GlobalPosition.DistanceTo(player.GlobalPosition);
+		
+		// adjust sprite orientation
+		if (direction.X > 0)
+		{
+			animation.FlipH = true;
+		}
+		else if (direction.X < 0)
+		{
+			animation.FlipH = false;
+		}
 		
 		if (distanceToPlayer <= AttackRange)
 		{
@@ -55,12 +66,16 @@ public partial class Enemy : CharacterBody2D
 	{
 		isAttacking = true;
 		((Player)player).GetHit();
+		soundPlayer = GetNode<AudioStreamPlayer>("Sounds/Attack");
+		soundPlayer.Play();
 		animation.Play("attack");
 	}
 	
 	public void Die()
 	{
 		isDying = true;
+		soundPlayer = GetNode<AudioStreamPlayer>("Sounds/Damage");
+		soundPlayer.Play();
 		animation.Play("death");
 	}
 
