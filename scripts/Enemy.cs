@@ -8,6 +8,7 @@ public partial class Enemy : CharacterBody2D
 	
 	private Node2D player;
 	private AnimatedSprite2D animation;
+	private AudioStreamPlayer soundPlayer;
 	private bool isAttacking = false;
 	private bool isDying = false;
 
@@ -55,12 +56,16 @@ public partial class Enemy : CharacterBody2D
 	{
 		isAttacking = true;
 		((Player)player).GetHit();
+		soundPlayer = GetNode<AudioStreamPlayer>("Sounds/Attack");
+		soundPlayer.Play();
 		animation.Play("attack");
 	}
 	
 	public void Die()
 	{
 		isDying = true;
+		soundPlayer = GetNode<AudioStreamPlayer>("Sounds/Damage");
+		soundPlayer.Play();
 		animation.Play("death");
 	}
 

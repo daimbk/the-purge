@@ -5,6 +5,7 @@ public partial class Player : CharacterBody2D
 {
 	[Export] public const int Speed = 300;
 	private AnimatedSprite2D animation;
+	private AudioStreamPlayer soundPlayer;
 	public Label healthUI;
 	
 	private bool isHit = false;
@@ -67,6 +68,10 @@ public partial class Player : CharacterBody2D
 	{
 		if (!isHit)  // ensure that the player is not already in the hit animation
 		{
+			// play sound
+			soundPlayer = GetNode<AudioStreamPlayer>("Sounds/Damage");
+			soundPlayer.Play();
+		
 			isHit = true;
 			animation.Play("hit");
 			health -= 1;

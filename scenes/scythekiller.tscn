@@ -1,7 +1,9 @@
-[gd_scene load_steps=37 format=3 uid="uid://cmsw0m6iwq22f"]
+[gd_scene load_steps=39 format=3 uid="uid://cmsw0m6iwq22f"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.cs" id="1_w02yg"]
 [ext_resource type="Texture2D" uid="uid://c0rsg63yycimj" path="res://assets/enemies/Bringer-of-Death-SpritSheet.png" id="1_wofkm"]
+[ext_resource type="AudioStream" uid="uid://d2vtwqkpuimpi" path="res://assets/sounds/monster-death-grunt.mp3" id="3_641px"]
+[ext_resource type="AudioStream" uid="uid://73mskg466050" path="res://assets/sounds/sword-slash.mp3" id="4_32ymv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dx6ne"]
 radius = 12.0
@@ -270,3 +272,11 @@ animation = &"death"
 frame = 7
 frame_progress = 1.0
 metadata/_edit_lock_ = true
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Damage" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("3_641px")
+
+[node name="Attack" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("4_32ymv")

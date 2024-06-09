@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqon6vcbe3hbv"]
+[gd_scene load_steps=8 format=3 uid="uid://cqon6vcbe3hbv"]
 
 [ext_resource type="FontFile" uid="uid://c38vfly7t5xqh" path="res://assets/fonts/PixelOperator8.ttf" id="1_4a5v8"]
 [ext_resource type="Script" path="res://scripts/GameOver.cs" id="1_yuob1"]
 [ext_resource type="FontFile" uid="uid://wkpp6fdbuk3o" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_gv63r"]
+[ext_resource type="AudioStream" uid="uid://ry2qwpub4px3" path="res://assets/sounds/game-over.mp3" id="4_op6v6"]
+[ext_resource type="AudioStream" uid="uid://djutqsppy33aa" path="res://assets/sounds/button-press.mp3" id="5_udxg1"]
+[ext_resource type="AudioStream" uid="uid://dxcjlkjgxxpto" path="res://assets/sounds/button-switch.mp3" id="6_xoa6e"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_3myx5"]
 
@@ -33,7 +36,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="PlayAgain" type="Button" parent="Menu/VBoxContainer"]
+[node name="Play" type="Button" parent="Menu/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -82,5 +85,13 @@ theme_override_fonts/font = ExtResource("2_gv63r")
 theme_override_font_sizes/font_size = 35
 text = "SURVIVED: Xh Xm Xs"
 
-[connection signal="pressed" from="Menu/VBoxContainer/PlayAgain" to="." method="_on_play_again_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[node name="Sounds" type="Node" parent="."]
+
+[node name="GameOverSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("4_op6v6")
+
+[node name="ButtonPress" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("5_udxg1")
+
+[node name="ButtonSwitch" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("6_xoa6e")

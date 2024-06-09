@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://frnp3dxrpl4k"]
+[gd_scene load_steps=11 format=3 uid="uid://frnp3dxrpl4k"]
 
+[ext_resource type="Script" path="res://scripts/Main.cs" id="1_7ifaq"]
 [ext_resource type="Texture2D" uid="uid://nc3lip23g2rv" path="res://assets/map/grass.png" id="1_gk5al"]
 [ext_resource type="PackedScene" uid="uid://nadoyp047mua" path="res://scenes/Player.tscn" id="2_vtmrb"]
 [ext_resource type="PackedScene" uid="uid://2b7xfatsy6h7" path="res://scenes/Shuriken.tscn" id="3_4oul5"]
 [ext_resource type="FontFile" uid="uid://wkpp6fdbuk3o" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_7sne5"]
 [ext_resource type="Script" path="res://scripts/EnemySpawner.cs" id="5_5qugi"]
 [ext_resource type="PackedScene" uid="uid://cmsw0m6iwq22f" path="res://scenes/ScytheKiller.tscn" id="6_5mmfy"]
+[ext_resource type="AudioStream" uid="uid://brumat0lnevsh" path="res://assets/sounds/main-theme.ogg" id="8_yd6kl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ff4sy"]
 texture = ExtResource("1_gk5al")
@@ -359,6 +361,7 @@ texture = ExtResource("1_gk5al")
 sources/0 = SubResource("TileSetAtlasSource_ff4sy")
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_7ifaq")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_d41ci")
@@ -397,3 +400,8 @@ SpawnDistance = 300.0
 [node name="Timer" type="Timer" parent="Enemies"]
 wait_time = 2.0
 autostart = true
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="MainTheme" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("8_yd6kl")
