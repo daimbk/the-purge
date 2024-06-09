@@ -3,20 +3,29 @@ using System;
 
 public partial class Player : CharacterBody2D
 {
-	public const int Speed = 300;
+	[Export] public const int Speed = 300;
 	private AnimatedSprite2D animation;
-	private bool gotHit = false;
+	public Label healthUI;
+	
+	private bool isHit = false;
+	private bool dead = false;
+	private int health = 3;
+	
 
 	public override void _Ready()
 	{
 		// get the AnimatedSprite2D node
 		animation = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		animation.Connect("animation_finished", new Callable(this, nameof(OnAnimationFinished)));
+		
+		healthUI = GetNode<Label>("/root/Main/Player/HealthUI");
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (!gotHit)
+		healthUI.Text = "Health: " + health;
+		
+		if (!dead && !isHit)
 		{
 			Vector2 velocity = Velocity;
 
@@ -56,13 +65,37 @@ public partial class Player : CharacterBody2D
 	
 	public void GetHit()
 	{
-		gotHit = true;
+		if (!isHit)  // ensure that the player is not already in the hit animation
+		{
+			isHit = true;
+			animation.Play("hit");
+			health -= 1;
+			if (health == 0)
+			{
+				Die();
+			}
+		}
+	}
+	
+	private void Die()
+	{
+		dead = true;
 		animation.Play("death");
 	}
 	
 	private void OnAnimationFinished()
 	{
-		// TODO: replace with GAME OVER screen
-		GetTree().Quit();
+		if (animation.Animation == "hit")
+		{
+			isHit = false;
+			if (health == 0)
+			{
+				Die();
+			}
+		}
+		else if (animation.Animation == "death")
+		{
+			GetTree().ChangeSceneToFile("res://scenes/GameOver.tscn");
+		}
 	}
 }
