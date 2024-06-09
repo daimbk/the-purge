@@ -31,6 +31,16 @@ public partial class Enemy : CharacterBody2D
 		Vector2 direction = (player.GlobalPosition - GlobalPosition).Normalized();
 		float distanceToPlayer = GlobalPosition.DistanceTo(player.GlobalPosition);
 		
+		// adjust sprite orientation
+		if (direction.X > 0)
+		{
+			animation.FlipH = true;
+		}
+		else if (direction.X < 0)
+		{
+			animation.FlipH = false;
+		}
+		
 		if (distanceToPlayer <= AttackRange)
 		{
 			// stop moving and attack the player
