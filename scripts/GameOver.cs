@@ -26,7 +26,7 @@ public partial class GameOver : Control
 		// set initial focus to the Play button
 		GetNode<Button>("Menu/VBoxContainer/Play").GrabFocus();
 		gameOverSoundPlayer.Play();
-		
+
 		// initialize and configure the timer
 		changeSceneTimer = new Timer();
 		AddChild(changeSceneTimer);
@@ -49,7 +49,7 @@ public partial class GameOver : Control
 	{
 		buttonSwitchPlayer.Play();
 	}
-	
+
 	private void OnChangeSceneTimerTimeout()
 	{
 		if (GetNode<Button>("Menu/VBoxContainer/Play").HasFocus())
@@ -60,5 +60,11 @@ public partial class GameOver : Control
 		{
 			GetTree().Quit();
 		}
+	}
+
+	public void SetElapsedTime(string time)
+	{
+		var timeLabel = GetNode<Label>("SurvivalTime");
+		timeLabel.Text = "SURVIVED: " + time;
 	}
 }

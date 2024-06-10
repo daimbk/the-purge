@@ -7,11 +7,20 @@ public partial class Player : CharacterBody2D
 	private AnimatedSprite2D animation;
 	private AudioStreamPlayer soundPlayer;
 	public Label healthUI;
-	
+	public Label energyUI;
+	public Label powerUI;
+	public Label levelUI;
+	private Main mainScene;
+
 	private bool isHit = false;
 	private bool dead = false;
-	private int health = 3;
 	
+	// 10 energy = 1 AOE attack
+	// 100 power orbs = 1 level up
+	private int health = 3;
+	private int energy = 0;
+	private int level = 0;
+	private int power = 0;
 
 	public override void _Ready()
 	{
@@ -20,11 +29,15 @@ public partial class Player : CharacterBody2D
 		animation.Connect("animation_finished", new Callable(this, nameof(OnAnimationFinished)));
 		
 		healthUI = GetNode<Label>("/root/Main/Player/HealthUI");
+		energyUI = GetNode<Label>("/root/Main/Player/EnergyUI");
+		powerUI = GetNode<Label>("/root/Main/Player/PowerUI");
+		levelUI = GetNode<Label>("/root/Main/Player/LevelUI");
+		mainScene = GetParent() as Main;
 	}
 
 	public override void _PhysicsProcess(double delta)
-	{
-		healthUI.Text = "Health: " + health;
+	{	
+		DisplayUI();
 		
 		if (!dead && !isHit)
 		{
@@ -64,6 +77,56 @@ public partial class Player : CharacterBody2D
 		}
 	}
 	
+	public void IncreaseHealth()
+	{
+		if (health < 3)
+		{
+			health += 1;
+		}
+	}
+
+	public void IncreaseEnergy()
+	{
+		energy += 1;
+		if (energy >= 10)
+		{
+			aoeAttack();
+		}
+	}
+	
+	public void IncreasePower()
+	{
+		power += 1;
+		if (power >= 100)
+		{
+			LevelUp();
+		}
+	}
+	
+	private void DisplayUI()
+	{
+		healthUI.Text = "Health: " + health;
+		energyUI.Text = "Energy: " + energy + "/10";
+		powerUI.Text = "Power: " + power + "/100";
+		levelUI.Text = "Level: " + level;
+	}
+	
+	private void aoeAttack()
+	{
+		if (energy == 10)
+		{
+			energy -= 0;
+			// implement attack
+		}
+	}
+	
+	private void LevelUp()
+	{
+		level += 1;
+		power -= 100;
+		// TODO: upgrades logic
+	}
+	
 	public void GetHit()
 	{
 		if (!isHit)  // ensure that the player is not already in the hit animation
@@ -100,7 +163,35 @@ public partial class Player : CharacterBody2D
 		}
 		else if (animation.Animation == "death")
 		{
-			GetTree().ChangeSceneToFile("res://scenes/GameOver.tscn");
+			float elapsedTime = mainScene.GetElapsedTime();
+			GetTree().Root.GetNode("/root/Main").QueueFree();
+			
+			var gameOverScene = (PackedScene)ResourceLoader.Load("res://scenes/GameOver.tscn");
+			var gameOverInstance = (Control)gameOverScene.Instantiate();
+			GetTree().Root.AddChild(gameOverInstance);
+
+			gameOverInstance.CallDeferred("SetElapsedTime", FormatTime(elapsedTime));
+		}
+	}
+
+	private string FormatTime(float time)
+	{
+		int totalSeconds = Mathf.FloorToInt(time);
+		int hours = totalSeconds / 3600;
+		int minutes = (totalSeconds % 3600) / 60;
+		int seconds = totalSeconds % 60;
+
+		if (hours > 0)
+		{
+			return $"{hours}h {minutes}m {seconds}s";
+		}
+		else if (minutes > 0)
+		{
+			return $"{minutes}m {seconds}s";
+		}
+		else
+		{
+			return $"{seconds}s";
 		}
 	}
 }

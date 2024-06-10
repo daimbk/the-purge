@@ -6,6 +6,10 @@ public partial class Enemy : CharacterBody2D
 	[Export] public int Speed = 100;
 	[Export] public float AttackRange = 15.0f;
 	
+	[Export] public PackedScene HealthOrbScene;
+	[Export] public PackedScene PowerOrbScene;
+	[Export] public PackedScene EnergyOrbScene;
+	
 	private Node2D player;
 	private AnimatedSprite2D animation;
 	private AudioStreamPlayer soundPlayer;
@@ -77,6 +81,34 @@ public partial class Enemy : CharacterBody2D
 		soundPlayer = GetNode<AudioStreamPlayer>("Sounds/Damage");
 		soundPlayer.Play();
 		animation.Play("death");
+		CallDeferred(nameof(DropOrbs));
+	}
+	
+	private void DropOrbs()
+	{
+		// health orb drop with 20% drop chance
+		if (GD.Randf() < 0.2f)
+		{
+			var healthOrbInstance = (Node2D)HealthOrbScene.Instantiate();
+			healthOrbInstance.GlobalPosition = GlobalPosition;
+			GetParent().AddChild(healthOrbInstance);
+		}
+		
+		// drop 8 PowerOrbs
+		for (int i = 0; i < 8; i++)
+		{
+			var powerOrbInstance = (Node2D)PowerOrbScene.Instantiate();
+			powerOrbInstance.GlobalPosition = GlobalPosition + new Vector2(GD.Randf() * 20 - 10, GD.Randf() * 20 - 10);
+			GetParent().AddChild(powerOrbInstance);
+		}
+		
+		 // drop 2 EnergyOrbs
+		for (int i = 0; i < 2; i++)
+		{
+			var energyOrbInstance = (Node2D)EnergyOrbScene.Instantiate();
+			energyOrbInstance.GlobalPosition = GlobalPosition + new Vector2(GD.Randf() * 20 - 10, GD.Randf() * 20 - 10);
+			GetParent().AddChild(energyOrbInstance);
+		}
 	}
 
 	private void OnAnimationFinished()
