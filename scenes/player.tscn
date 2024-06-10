@@ -1,6 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://nadoyp047mua"]
+[gd_scene load_steps=26 format=3 uid="uid://nadoyp047mua"]
 
 [ext_resource type="Script" path="res://scripts/Player.cs" id="1_r33hq"]
+[ext_resource type="PackedScene" uid="uid://6flsm0dmgium" path="res://scenes/Vaccuum.tscn" id="2_6mih2"]
 [ext_resource type="Texture2D" uid="uid://ciia4luln4rl4" path="res://assets/player-sheet.png" id="2_560ts"]
 [ext_resource type="AudioStream" uid="uid://wyjny708xsu2" path="res://assets/sounds/player-damage.mp3" id="3_nd6mk"]
 
@@ -170,6 +171,8 @@ script = ExtResource("1_r33hq")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 1)
 shape = SubResource("CapsuleShape2D_une8k")
+
+[node name="Vaccuum" parent="." instance=ExtResource("2_6mih2")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)

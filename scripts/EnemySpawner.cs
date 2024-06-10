@@ -7,7 +7,7 @@ public partial class EnemySpawner : Node
 	[Export] public float SpawnInterval = 2.0f;
 	[Export] public float SpawnDistance = 500.0f;
 	
-	public int numOfEnemies = 0;
+	//public int numOfEnemies = 0;
 
 	private Node2D player;
 	private Timer spawnTimer;
@@ -52,7 +52,6 @@ public partial class EnemySpawner : Node
 		// Calculate a random spawn position around the player
 		Vector2 spawnPosition = player.GlobalPosition + new Vector2(SpawnDistance, 0).Rotated((float)GD.RandRange(0, 2 * Math.PI));
 		enemyInstance.GlobalPosition = spawnPosition;
-		numOfEnemies++;
 		
 		//numOfEnemies++;
 	}
