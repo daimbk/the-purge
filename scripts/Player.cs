@@ -11,16 +11,18 @@ public partial class Player : CharacterBody2D
 	public Label powerUI;
 	public Label levelUI;
 	private Main mainScene;
+	private PackedScene upgradeScene;
 
 	private bool isHit = false;
 	private bool dead = false;
+	public bool extraLife = false;
 	
 	// 10 energy = 1 AOE attack
 	// 100 power orbs = 1 level up
 	private int health = 3;
 	private int energy = 0;
 	private int level = 0;
-	private int power = 0;
+	private int power = 99;
 
 	public override void _Ready()
 	{
@@ -32,7 +34,9 @@ public partial class Player : CharacterBody2D
 		energyUI = GetNode<Label>("/root/Main/Player/EnergyUI");
 		powerUI = GetNode<Label>("/root/Main/Player/PowerUI");
 		levelUI = GetNode<Label>("/root/Main/Player/LevelUI");
+		
 		mainScene = GetParent() as Main;
+		upgradeScene = ResourceLoader.Load<PackedScene>("res://scenes/Upgrade.tscn");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -124,7 +128,11 @@ public partial class Player : CharacterBody2D
 	{
 		level += 1;
 		power -= 100;
-		// TODO: upgrades logic
+		
+		// show upgrade scene
+		var upgradeScreen = (Upgrade)upgradeScene.Instantiate();
+		AddChild(upgradeScreen);
+		upgradeScreen.ShowUpgradeScreen(this);
 	}
 	
 	public void GetHit()
@@ -140,7 +148,15 @@ public partial class Player : CharacterBody2D
 			health -= 1;
 			if (health == 0)
 			{
-				Die();
+				if (extraLife)
+				{
+					extraLife = false;
+					health = 3;
+				}
+				else
+				{
+					Die();
+				}
 			}
 		}
 	}

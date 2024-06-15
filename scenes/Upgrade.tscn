@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://uruo7ucaxrii"]
+
+[ext_resource type="Script" path="res://scripts/Upgrade.cs" id="1_sesi1"]
+[ext_resource type="AudioStream" uid="uid://b27xr500ip4uf" path="res://assets/sounds/upgrade.mp3" id="2_4slqc"]
+[ext_resource type="AudioStream" uid="uid://djutqsppy33aa" path="res://assets/sounds/button-press.mp3" id="2_pbyid"]
+[ext_resource type="AudioStream" uid="uid://dxcjlkjgxxpto" path="res://assets/sounds/button-switch.mp3" id="3_fxuqd"]
+
+[node name="Upgrade" type="VBoxContainer"]
+process_mode = 2
+layout_direction = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.5
+offset_top = -50.5
+offset_right = 110.5
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("1_sesi1")
+
+[node name="Button1" type="Button" parent="."]
+layout_mode = 2
+text = "Increase Shuriken Speed +5"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 2
+text = "Spawn a Red Shuriken"
+
+[node name="Button3" type="Button" parent="."]
+layout_mode = 2
+text = "Defy Death
+"
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="UpgradeSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("2_4slqc")
+
+[node name="ButtonPress" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("2_pbyid")
+
+[node name="ButtonSwitch" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("3_fxuqd")

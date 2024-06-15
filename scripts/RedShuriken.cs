@@ -1,10 +1,10 @@
 using Godot;
 using System;
 
-public partial class Shuriken : Node2D
+public partial class RedShuriken : Node2D
 {
 	[Export] public float RotationSpeed = 20.0f;
-	[Export] public float orbitRadius = 100f;
+	[Export] public float orbitRadius = 150f;
 	[Export] public float orbitSpeed = 10.0f;
 	private float angle = 0f;
 	
