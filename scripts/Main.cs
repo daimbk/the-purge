@@ -10,6 +10,7 @@ public partial class Main : Node2D
 
 	public override void _Ready()
 	{
+		// create and configure the survival timer
 		survivalTimer = new Timer();
 		AddChild(survivalTimer);
 		survivalTimer.WaitTime = 1.0f;
@@ -17,8 +18,10 @@ public partial class Main : Node2D
 		survivalTimer.Connect("timeout", new Callable(this, nameof(OnTimerTimeout)));
 		survivalTimer.Start();
 
+		// initialize UI elements
 		timerUI = GetNode<Label>("/root/Main/Player/TimeDisplay");
 
+		// play the main theme
 		soundPlayer = GetNode<AudioStreamPlayer>("Sounds/MainTheme");
 		soundPlayer.Play();
 	}

@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://ct1dqotit77j7"]
+
+[ext_resource type="Script" path="res://scripts/RedShuriken.cs" id="1_fhp2s"]
+[ext_resource type="Texture2D" uid="uid://7bbo052ya2bg" path="res://assets/weapons/SawBladeSuriken.png" id="2_7x6rw"]
+[ext_resource type="PackedScene" uid="uid://qelcywsr23vs" path="res://scenes/HitDetection.tscn" id="3_6wge3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g8lpv"]
+radius = 6.0
+
+[node name="RedShuriken" type="Node2D"]
+script = ExtResource("1_fhp2s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2.38419e-07, 4.76837e-07)
+scale = Vector2(0.64778, 0.586521)
+texture = ExtResource("2_7x6rw")
+region_enabled = true
+region_rect = Rect2(5, 5, 22, 22)
+
+[node name="HitDetection" parent="." instance=ExtResource("3_6wge3")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitDetection"]
+shape = SubResource("CircleShape2D_g8lpv")
+metadata/_edit_lock_ = true

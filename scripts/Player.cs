@@ -3,7 +3,7 @@ using System;
 
 public partial class Player : CharacterBody2D
 {
-	[Export] public const int Speed = 300;
+	[Export] public int Speed = 300;
 	private AnimatedSprite2D animation;
 	private AudioStreamPlayer soundPlayer;
 	public Label healthUI;
@@ -11,11 +11,14 @@ public partial class Player : CharacterBody2D
 	public Label powerUI;
 	public Label levelUI;
 	private Main mainScene;
+	private PackedScene upgradeScene;
+	private Timer speedTimer;
 
 	private bool isHit = false;
 	private bool dead = false;
+	public bool extraLife = false;
 	
-	// 10 energy = 1 AOE attack
+	// 10 energy = 1 speed buff for short time
 	// 100 power orbs = 1 level up
 	private int health = 3;
 	private int energy = 0;
@@ -32,7 +35,16 @@ public partial class Player : CharacterBody2D
 		energyUI = GetNode<Label>("/root/Main/Player/EnergyUI");
 		powerUI = GetNode<Label>("/root/Main/Player/PowerUI");
 		levelUI = GetNode<Label>("/root/Main/Player/LevelUI");
+		
 		mainScene = GetParent() as Main;
+		upgradeScene = ResourceLoader.Load<PackedScene>("res://scenes/Upgrade.tscn");
+		
+		// speed buff timer
+		speedTimer = new Timer();
+		speedTimer.WaitTime = 5.0f; // 5 seconds
+		speedTimer.OneShot = true;
+		speedTimer.Connect("timeout", new Callable(this, nameof(OnSpeedTimerTimeout)));
+		AddChild(speedTimer);
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -70,6 +82,12 @@ public partial class Player : CharacterBody2D
 			{
 				animation.Play("walk");
 			}
+			
+			// special input handle
+			if (Input.IsActionJustPressed("Special") && energy >= 10)
+			{
+				IncreaseSpeed();
+			}
 
 			// update the velocity and move the player
 			Velocity = velocity;
@@ -88,10 +106,6 @@ public partial class Player : CharacterBody2D
 	public void IncreaseEnergy()
 	{
 		energy += 1;
-		if (energy >= 10)
-		{
-			aoeAttack();
-		}
 	}
 	
 	public void IncreasePower()
@@ -111,20 +125,27 @@ public partial class Player : CharacterBody2D
 		levelUI.Text = "Level: " + level;
 	}
 	
-	private void aoeAttack()
+	private void IncreaseSpeed()
 	{
-		if (energy == 10)
-		{
-			energy -= 0;
-			// implement attack
-		}
+		energy -= 10;
+		Speed = 400;
+		speedTimer.Start();
+	}
+
+	private void OnSpeedTimerTimeout()
+	{
+		Speed = 300;
 	}
 	
 	private void LevelUp()
 	{
 		level += 1;
 		power -= 100;
-		// TODO: upgrades logic
+		
+		// show upgrade scene
+		var upgradeScreen = (Upgrade)upgradeScene.Instantiate();
+		AddChild(upgradeScreen);
+		upgradeScreen.ShowUpgradeScreen(this);
 	}
 	
 	public void GetHit()
@@ -140,7 +161,15 @@ public partial class Player : CharacterBody2D
 			health -= 1;
 			if (health == 0)
 			{
-				Die();
+				if (extraLife)
+				{
+					extraLife = false;
+					health = 3;
+				}
+				else
+				{
+					Die();
+				}
 			}
 		}
 	}
