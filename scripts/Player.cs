@@ -22,7 +22,7 @@ public partial class Player : CharacterBody2D
 	private int health = 3;
 	private int energy = 0;
 	private int level = 0;
-	private int power = 99;
+	private int power = 0;
 
 	public override void _Ready()
 	{

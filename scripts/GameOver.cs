@@ -54,12 +54,22 @@ public partial class GameOver : Control
 	{
 		if (GetNode<Button>("Menu/VBoxContainer/Play").HasFocus())
 		{
+			ResetGame();
 			GetTree().ChangeSceneToFile("res://scenes/Main.tscn");
 		}
 		else
 		{
 			GetTree().Quit();
 		}
+	}
+
+	private void ResetGame()
+	{
+		// stop all audio and timers
+		gameOverSoundPlayer.Stop();
+		buttonPressPlayer.Stop();
+		buttonSwitchPlayer.Stop();
+		changeSceneTimer.Stop();
 	}
 
 	public void SetElapsedTime(string time)
